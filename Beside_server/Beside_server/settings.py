@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -47,6 +48,19 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+REST_FRAMEWORK = {
+    # Use hyperlinked styles by default.
+    # Only used if the `serializer_class` attribute is not set on a view.
+    'DEFAULT_MODEL_SERIALIZER_CLASS':
+        'rest_framework.serializers.HyperlinkedModelSerializer',
+
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
 ROOT_URLCONF = 'Beside_server.urls'
 
 WSGI_APPLICATION = 'Beside_server.wsgi.application'
@@ -57,8 +71,10 @@ WSGI_APPLICATION = 'Beside_server.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'mysql.connector.django',
+        'NAME': 'beside',
+        'USER': 'root',
+        'PASSWORD': 'guanwenjie',
     }
 }
 
